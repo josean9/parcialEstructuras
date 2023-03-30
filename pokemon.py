@@ -76,6 +76,34 @@ class Pokemon():
         self.health_points = health_points
         self.attack_rating = attack_rating
         self.defense_rating = defense_rating
+    def get_pokemon_name(self):
+        return self.pokemon_name
+    def get_weapon_type(self):
+        return self.weapon_type
+    def get_health_points(self):
+        return self.health_points
+    def get_attack_rating(self):
+        return self.attack_rating
+    def get_defense_rating(self):
+        return self.defense_rating
+    
+    def __str__(self):
+        return "Pokemon ID " + str(self.id) + " with name " + self.pokemon_name + " has as weapon " + self.weapon_type.name + " and health " + str(self.health_points)
+    def is_alive(self):
+        if self.health_points > 0:
+            return True
+        else:
+            return False
+    def fight_defense(self, damage):
+        if self.defense_rating > damage:
+            return False
+        else:
+            self.health_points-=(damage-self.defense_rating)
+            print("La nueva vida del pokemon " + str(self.pokemon_name) + " es: " + str(self.health_points))
+            return True
+    def fight_attack(self, pokemon):
+        print(pokemon.fight_defense(self.attack_rating))
+
 
 
 
@@ -180,15 +208,16 @@ def main():
     print("=================================================================.")
     pokemon_5 = Pokemon(5, "Venusaur", WeaponType.PUNCH, 99, 10, 7)
     pokemon_6 = Pokemon(6, "Charmeleon", WeaponType.PUNCH, 99, 9, 8)
-
     pokemon_was_hit = pokemon_5.fight_attack(pokemon_6)
-
     if pokemon_was_hit:
+        print(pokemon_6.get_health_points())
         if pokemon_6.get_health_points() == 97:
             print("Test PASS. The method fight_attack() has been implemented correctly.")
         else:
+            
             print("Test FAIL. Check the method fight_attack().")
     else:
+        print(pokemon_6.get_health_points())
         if pokemon_6.get_health_points() == 99:
             print("Test PASS. The method fight_attack() has been implemented correctly.")
         else:
