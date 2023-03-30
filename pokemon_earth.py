@@ -33,9 +33,9 @@ this Python class.
 
 # Source packages.
 
-
+from weapon_type import WeaponType
 from pokemon import Pokemon
-class PokemonEarth():
+class PokemonEarth(Pokemon):
     """Python class to implement a basic version of a Pokemon of the game.
 
     This Python class implements the basic version of a Pokemon of the game.
@@ -70,8 +70,17 @@ class PokemonEarth():
     """
     def __init__(self, id, pokemon_name, weapon_type, health_points,
                  attack_rating, defense_rating):
-        super().__init__(id, pokemon_name, weapon_type, health_points, attack_rating, defense_rating)
-        
+        self.id = id
+        self.pokemon_name = pokemon_name
+        self.weapon_type = weapon_type
+        self.health_points = health_points
+        self.attack_rating = attack_rating
+        self.defense_rating = defense_rating
+        while True: 
+            if int(self.defense_rating)< 0 or int(self.defense_rating) > 20:
+                self.defense_rating = int(input("Please enter a valid defense rating between 0 and 20: "))
+            else:
+                break
         
 
 def main():
