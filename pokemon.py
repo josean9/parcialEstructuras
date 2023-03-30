@@ -102,7 +102,7 @@ class Pokemon():
             print("La nueva vida del pokemon " + str(self.pokemon_name) + " es: " + str(self.health_points))
             return True
     def fight_attack(self, pokemon):
-        print(pokemon.fight_defense(self.attack_rating))
+        return pokemon.fight_defense(self.attack_rating)
 
 
 
@@ -208,16 +208,17 @@ def main():
     print("=================================================================.")
     pokemon_5 = Pokemon(5, "Venusaur", WeaponType.PUNCH, 99, 10, 7)
     pokemon_6 = Pokemon(6, "Charmeleon", WeaponType.PUNCH, 99, 9, 8)
+    
     pokemon_was_hit = pokemon_5.fight_attack(pokemon_6)
     if pokemon_was_hit:
-        print(pokemon_6.get_health_points())
+        
         if pokemon_6.get_health_points() == 97:
             print("Test PASS. The method fight_attack() has been implemented correctly.")
         else:
             
             print("Test FAIL. Check the method fight_attack().")
     else:
-        print(pokemon_6.get_health_points())
+        print(pokemon_6.get_health_points(), "estoy en el eslse")
         if pokemon_6.get_health_points() == 99:
             print("Test PASS. The method fight_attack() has been implemented correctly.")
         else:
