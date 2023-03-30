@@ -42,7 +42,7 @@ class pokemon():
                 continue
             else:
                 break
-        while True:
+        """while True:
             if self.arma == "Puñetazo":
                 break
             elif self.arma == "Patada":
@@ -54,7 +54,7 @@ class pokemon():
             else:
                 self.arma = input("El arma debe ser Puñetazo, Patada, Codazo o Cabezazo, por favor, introduzca una de estas opciones: ")
                 print("El arma debe ser Puñetazo, Patada, Codazo o Cabezazo, por favor, introduzca una de estas opciones: ")
-                continue
+                continue"""
     def __str__(self):
         return "Pokemon ID: "+str(self.ID)+" con nombre: "+self.nombre+" tiene de arma: "+self.arma+" y salud: "+str(self.salud)
 pokemon1 = pokemon(1, "Pikachu", "Rayo", 30, 50, 30)
