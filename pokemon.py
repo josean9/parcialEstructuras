@@ -62,13 +62,14 @@ class pokemon():
             return ("No se ha podido atacar, la defensa es mayor que el ataque")
         else:
             self.salud = self.salud - (points_of_damage - self.defensa)
-            return ("Se ha podido atacar, la nueva salud del pokemon es{}".format(self.salud))
+            return ("Se ha podido atacar, la nueva salud del pokemon es {}".format(self.salud))
     def fight_attack(self, pokemon_to_attack):
-        pokemon_to_attack.fight_defense(int(self.ataque))
+        print(pokemon_to_attack.fight_defense(int(self.ataque)))
     def __str__(self):
         return "Pokemon ID: "+str(self.ID)+" con nombre: "+self.nombre+" tiene de arma: "+self.arma+" y salud: "+str(self.salud)
 pokemon1 = pokemon(1, "Pikachu", "Puñetazo", 76, 6, 3)
 pokemon2 = pokemon(2, "Charmander", "Patada", 32, 3, 2)
 pokemon3 = pokemon(3, "Bulbasaur", "Codazo", 56, 7, 4)
 pokemon4 = pokemon(4, "Squirtle", "Cabezazo", 34, 5, 6)
+print(pokemon4.fight_attack(pokemon1))
 print(pokemon1)
