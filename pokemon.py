@@ -76,6 +76,46 @@ class Pokemon():
         self.health_points = health_points
         self.attack_rating = attack_rating
         self.defense_rating = defense_rating
+        while True:
+            try:
+                self.id = int(self.id)
+                break
+            except ValueError:
+                self.id = int(input("El ID debe ser un número, por favor, introduzca un número: "))
+        while True:
+            try:
+                self.health_points = int(self.health_points)
+                break
+            except ValueError:
+                self.health_points = int(input("La salud debe ser un número, por favor, introduzca un número: "))
+        while True:
+            try:
+                self.attack_rating = int(self.attack_rating)
+                break
+            except ValueError:
+                self.attack_rating = int(input("El ataque debe ser un número, por favor, introduzca un número: "))
+        while True:
+            try:
+                self.defense_rating = int(self.defense_rating)
+                break
+            except ValueError:
+                self.defense_rating = int(input("La defensa debe ser un número, por favor, introduzca un número: "))
+        while True:
+            if self.health_points>100 or self.health_points<0:
+                self.health_points = input("La salud debe ser un número entre 0 y 10, por favor, introduzca un número: ")
+            else:
+                break
+        while True:
+            if self.attack_rating>10 or self.attack_rating<0:
+                self.attack_rating = input("El ataque debe ser un número entre 0 y 10, por favor, introduzca un número: ")
+            else:
+                break
+        while True:
+            if self.defense_rating > 10 or self.defense_rating < 0:
+                self.defense_rating = input("La defensa debe ser un número entre 0 y 10, por favor, introduzca un número: ")
+            else:
+                break
+        
     def get_pokemon_name(self):
         return self.pokemon_name
     def get_weapon_type(self):
