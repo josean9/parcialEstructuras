@@ -32,13 +32,8 @@ This Python method contains the application of the Game.
 
 # Source packages.
 
-
+import csv
 from pokemon import Pokemon
-from pokemon_water import PokemonWater
-from pokemon_earth import PokemonEarth
-from pokemon_electricity import PokemonElectricity
-from pokemon_water import PokemonWater
-from weapon_type import WeaponType
 def get_data_from_user(name_file):
     """Function to obtain data from each user.
 
@@ -63,29 +58,14 @@ def get_data_from_user(name_file):
     """
     list_pokemons = []
     with open(name_file, "r") as file:
-        for line in file:
-            pokemon = line.split(",")
-            if pokemon[2] == "Water":
-                list_pokemons.append(PokemonWater(int(pokemon[0]), pokemon[1],
-                                                  WeaponType.WATER,
-                                                  int(pokemon[3]),
-                                                  int(pokemon[4]),
-                                                  int(pokemon[5])))
-            elif pokemon[2] == "Earth":
-                list_pokemons.append(PokemonEarth(int(pokemon[0]), pokemon[1],
-                                                  WeaponType.EARTH,
-                                                  int(pokemon[3]),
-                                                  int(pokemon[4]),
-                                                  int(pokemon[5])))
-            elif pokemon[2] == "Electricity":
-                list_pokemons.append(PokemonElectricity(int(pokemon[0]),
-                                                        pokemon[1],
-                                                        WeaponType.ELECTRICITY,
-                                                        int(pokemon[3]),
-                                                        int(pokemon[4]),
-                                                        int(pokemon[5])))
+      reader = csv.reader(file)
+      for line in reader:
+        list = Pokemon(int(line[0]), str(line[1]), str(line[2]), int(line[3]), int(line[4]), int(line[5]))
+        list_pokemons.append(list)
     return list_pokemons
-  
+            
+
+    
 
 
 
@@ -114,14 +94,16 @@ def get_pokemon_in_a_list_of_pokemons(coach_to_ask, list_of_pokemons):
     -------
        >>> get_pokemon_in_a_list_of_pokemons(1, list_of_pokemons)
     """
-    list_pokemons = []
-    for pokemon in list_of_pokemons:
-        if pokemon.get_coach() == coach_to_ask and not pokemon.is_defeated():
-            list_pokemons.append(pokemon)
-    print("List of Pokemons of the Coach " + str(coach_to_ask) + ":")
-    for pokemon in list_pokemons:
-        print(pokemon)
-    return list_pokemons
+    for i in list_of_pokemons:
+      print(i.pokemon_name)
+    pokemon_a_eleir = input("Coach " + str(coach_to_ask) + " select a Pokemon: ")
+    for i in list_of_pokemons:
+      if str(pokemon_a_eleir) == str(i.pokemon_name):
+        return"Ha seleccionado {}".format(i.pokemon_name)
+      else:
+        return"No ha seleccionado ningun pokemon"
+print(get_pokemon_in_a_list_of_pokemons("coach1", get_data_from_user("coach_1_pokemons.csv")))
+    
 
 
 def coach_is_undefeated(list_of_pokemons):
@@ -147,11 +129,12 @@ def coach_is_undefeated(list_of_pokemons):
     -------
        >>> coach_is_undefeated(list_of_pokemons)
     """
-    for pokemon in list_of_pokemons:
-        if not pokemon.is_defeated():
-            return True
-    return False
-    
+    for i in list_of_pokemons:
+      if i.health_points > 0:
+        return True
+      else:
+        return False
+
 
 def main():
     """Function main of the module.
@@ -181,11 +164,13 @@ def main():
     print("Let's start to set the configuration of each game user. \n")
 
     # Get configuration for Game User 1.
-
+    coach1 = get_data_from_user("coach_1_pokemons.csv")
+    
 
 
     # Get configuration for Game User 2.
-
+    coach2 = get_data_from_user("coach_2_pokemons.csv")
+    
 
     print("------------------------------------------------------------------")
     print("The Game starts...")
@@ -195,9 +180,13 @@ def main():
     
 
     # Choose first pokemons
- 
-
     # Main loop.
+    
+
+        # Turno del usuario del Juego 2.
+        # Turno del usuario del Juego 1.
+        
+
 
 
 
