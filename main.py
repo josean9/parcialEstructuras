@@ -98,12 +98,16 @@ def get_pokemon_in_a_list_of_pokemons(coach_to_ask, list_of_pokemons):
       print(i.pokemon_name)
     pokemon_a_eleir = input("Coach " + str(coach_to_ask) + " select a Pokemon: ")
     for i in list_of_pokemons:
-      if str(pokemon_a_eleir) == str(i.pokemon_name):
-        return"Ha seleccionado {}".format(i.pokemon_name)
+      if str(pokemon_a_eleir) == str(list_of_pokemons[0].pokemon_name):
+        return"Ha seleccionado {}".format(list_of_pokemons[0].pokemon_name)
+      elif str(pokemon_a_eleir) == str(list_of_pokemons[1].pokemon_name):
+        return"Ha seleccionado {}".format(list_of_pokemons[1].pokemon_name)
+      elif str(pokemon_a_eleir) == str(list_of_pokemons[2].pokemon_name):
+        return"Ha seleccionado {}".format(list_of_pokemons[2].pokemon_name)
       else:
-        return"No ha seleccionado ningun pokemon"
-print(get_pokemon_in_a_list_of_pokemons("coach1", get_data_from_user("coach_1_pokemons.csv")))
-    
+        print("No ha seleccionado ningun Pokemon")
+        print(get_pokemon_in_a_list_of_pokemons(coach_to_ask, list_of_pokemons))
+        
 
 
 def coach_is_undefeated(list_of_pokemons):
@@ -165,22 +169,22 @@ def main():
 
     # Get configuration for Game User 1.
     coach1 = get_data_from_user("coach_1_pokemons.csv")
-    
     pokemons1 = get_pokemon_in_a_list_of_pokemons("coach1", coach1)
     
     
 
 
     # Get configuration for Game User 2.
-    
     coach2 = get_data_from_user("coach_2_pokemons.csv")
     pokemons2 = get_pokemon_in_a_list_of_pokemons("coach2", coach2)
+
     print("------------------------------------------------------------------")
     print("The Game starts...")
     print("------------------------------------------------------------------")
 
     # Get a copy of the list of pokemons:
-    
+    pokemons=pokemons1+pokemons2
+    print(pokemons)
 
     # Choose first pokemons
     # Main loop.
