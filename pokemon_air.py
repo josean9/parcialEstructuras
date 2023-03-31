@@ -76,7 +76,7 @@ class PokemonAir(Pokemon):
                          attack_rating, defense_rating)
         def fight_defense(self, attack_points):
             numero_aleatorio = randint(1,100)
-            if numero_aleatorio <= 20:
+            if numero_aleatorio <= 50:
                 damage = 0
             else:
                 damage = attack_points

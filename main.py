@@ -33,7 +33,12 @@ This Python method contains the application of the Game.
 # Source packages.
 
 
-
+from pokemon import Pokemon
+from pokemon_water import PokemonWater
+from pokemon_earth import PokemonEarth
+from pokemon_electricity import PokemonElectricity
+from pokemon_water import PokemonWater
+from weapon_type import WeaponType
 def get_data_from_user(name_file):
     """Function to obtain data from each user.
 
@@ -56,6 +61,31 @@ def get_data_from_user(name_file):
     -------
       >>> list_pokemons = get_data_from_user("file.csv")
     """
+    list_pokemons = []
+    with open(name_file, "r") as file:
+        for line in file:
+            pokemon = line.split(",")
+            if pokemon[2] == "Water":
+                list_pokemons.append(PokemonWater(int(pokemon[0]), pokemon[1],
+                                                  WeaponType.WATER,
+                                                  int(pokemon[3]),
+                                                  int(pokemon[4]),
+                                                  int(pokemon[5])))
+            elif pokemon[2] == "Earth":
+                list_pokemons.append(PokemonEarth(int(pokemon[0]), pokemon[1],
+                                                  WeaponType.EARTH,
+                                                  int(pokemon[3]),
+                                                  int(pokemon[4]),
+                                                  int(pokemon[5])))
+            elif pokemon[2] == "Electricity":
+                list_pokemons.append(PokemonElectricity(int(pokemon[0]),
+                                                        pokemon[1],
+                                                        WeaponType.ELECTRICITY,
+                                                        int(pokemon[3]),
+                                                        int(pokemon[4]),
+                                                        int(pokemon[5])))
+    return list_pokemons
+  
 
 
 
@@ -84,7 +114,14 @@ def get_pokemon_in_a_list_of_pokemons(coach_to_ask, list_of_pokemons):
     -------
        >>> get_pokemon_in_a_list_of_pokemons(1, list_of_pokemons)
     """
-
+    list_pokemons = []
+    for pokemon in list_of_pokemons:
+        if pokemon.get_coach() == coach_to_ask and not pokemon.is_defeated():
+            list_pokemons.append(pokemon)
+    print("List of Pokemons of the Coach " + str(coach_to_ask) + ":")
+    for pokemon in list_pokemons:
+        print(pokemon)
+    return list_pokemons
 
 
 def coach_is_undefeated(list_of_pokemons):
@@ -110,7 +147,11 @@ def coach_is_undefeated(list_of_pokemons):
     -------
        >>> coach_is_undefeated(list_of_pokemons)
     """
-
+    for pokemon in list_of_pokemons:
+        if not pokemon.is_defeated():
+            return True
+    return False
+    
 
 def main():
     """Function main of the module.
@@ -134,10 +175,13 @@ def main():
       >>> main()
     """
 
+
+
     print("Welcome to the Game.")
     print("Let's start to set the configuration of each game user. \n")
 
     # Get configuration for Game User 1.
+
 
 
     # Get configuration for Game User 2.
@@ -148,7 +192,7 @@ def main():
     print("------------------------------------------------------------------")
 
     # Get a copy of the list of pokemons:
-
+    
 
     # Choose first pokemons
  
