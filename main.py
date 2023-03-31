@@ -165,11 +165,14 @@ def main():
 
     # Get configuration for Game User 1.
     coach1 = get_data_from_user("coach_1_pokemons.csv")
+    coach2 = get_data_from_user("coach_2_pokemons.csv")
+    pokemons1 = get_pokemon_in_a_list_of_pokemons("coach1", coach1)
+    pokemons2 = get_pokemon_in_a_list_of_pokemons("coach2", coach2)
     
 
 
     # Get configuration for Game User 2.
-    coach2 = get_data_from_user("coach_2_pokemons.csv")
+    
     
 
     print("------------------------------------------------------------------")
