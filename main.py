@@ -31,7 +31,7 @@ This Python method contains the application of the Game.
 
 
 # Source packages.
-
+from random import *
 import csv
 from pokemon import Pokemon
 def get_data_from_user(name_file):
@@ -99,11 +99,14 @@ def get_pokemon_in_a_list_of_pokemons(coach_to_ask, list_of_pokemons):
     pokemon_a_eleir = input("Coach " + str(coach_to_ask) + " select a Pokemon: ")
     for i in list_of_pokemons:
       if str(pokemon_a_eleir) == str(list_of_pokemons[0].pokemon_name):
-        return"Ha seleccionado {}".format(list_of_pokemons[0].pokemon_name)
+        print("Ha seleccionado {}".format(list_of_pokemons[0].pokemon_name))
+        return list_of_pokemons[0]
       elif str(pokemon_a_eleir) == str(list_of_pokemons[1].pokemon_name):
-        return"Ha seleccionado {}".format(list_of_pokemons[1].pokemon_name)
+        print("Ha seleccionado {}".format(list_of_pokemons[1].pokemon_name))
+        return list_of_pokemons[1]
       elif str(pokemon_a_eleir) == str(list_of_pokemons[2].pokemon_name):
-        return"Ha seleccionado {}".format(list_of_pokemons[2].pokemon_name)
+        print("Ha seleccionado {}".format(list_of_pokemons[2].pokemon_name))
+        return list_of_pokemons[2]
       else:
         print("No ha seleccionado ningun Pokemon")
         print(get_pokemon_in_a_list_of_pokemons(coach_to_ask, list_of_pokemons))
@@ -169,28 +172,55 @@ def main():
 
     # Get configuration for Game User 1.
     coach1 = get_data_from_user("coach_1_pokemons.csv")
-    pokemons1 = get_pokemon_in_a_list_of_pokemons("coach1", coach1)
+    
     
     
 
 
     # Get configuration for Game User 2.
     coach2 = get_data_from_user("coach_2_pokemons.csv")
-    pokemons2 = get_pokemon_in_a_list_of_pokemons("coach2", coach2)
-
+    
+    
     print("------------------------------------------------------------------")
     print("The Game starts...")
     print("------------------------------------------------------------------")
 
     # Get a copy of the list of pokemons:
-    pokemons=pokemons1+pokemons2
-    print(pokemons)
-
-    # Choose first pokemons
-    # Main loop.
+    pokemons= [coach1, coach2]
+    
     
 
+    # Choose first pokemons
+    pokemons1 = get_pokemon_in_a_list_of_pokemons("coach1", coach1)
+    pokemons2 = get_pokemon_in_a_list_of_pokemons("coach2", coach2)
+    # Main loop.
+    while coach_is_undefeated(coach1) and coach_is_undefeated(coach2):
+      numeroAleatorio = random.randint(1, 2)
+      if numeroAleatorio == 1:
+        print("Empieza el jugador uno")
+        print("El jugador uno selecciona {}".format(pokemons1.pokemon_name))
+        print("El jugador dos selecciona {}".format(pokemons2.pokemon_name))
+        while not coach_is_undefeated(coach1) or not coach_is_undefeated(coach2):
+          print("El jugador uno ataca")
+          pokemons1.fight_attack(pokemons2)
+          print("El jugador dos ataca")
+          pokemons2.fight_attack(pokemons1)
+          continue
+        break
+
+      else:
+        print("Empieza el jugador dos")
+        print("El jugador dos selecciona {}".format(pokemons2.pokemon_name))
+        print("El jugador uno selecciona {}".format(pokemons1.pokemon_name))
+        while not coach_is_undefeated(coach1) or not coach_is_undefeated(coach2):
+          print("El jugador dos ataca")
+          pokemons2.fight_attack(pokemons1)
+          print("El jugador uno ataca")
+          pokemons1.fight_attack(pokemons2)
+          continue
+        break
         # Turno del usuario del Juego 2.
+      
         # Turno del usuario del Juego 1.
         
 
