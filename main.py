@@ -229,6 +229,12 @@ def main():
           pokemons2.fight_attack(pokemons1)
           print("El jugador uno ataca")
           pokemons1.fight_attack(pokemons2)
+          print("Los pokemon del jugador 1 son:")
+          for i in coach1:
+            print(i.pokemon_name)
+          print("Los pokemon del jugador 2 son:")
+          for i in coach2:
+            print(i.pokemon_name)
           if coach_is_undefeated(coach1) == False or coach_is_undefeated(coach2) == False:
             break
           else:
