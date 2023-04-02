@@ -31,7 +31,7 @@ This Python method contains the application of the Game.
 
 
 # Source packages.
-from random import *
+import random
 import csv
 from pokemon import Pokemon
 def get_data_from_user(name_file):
@@ -136,11 +136,10 @@ def coach_is_undefeated(list_of_pokemons):
     -------
        >>> coach_is_undefeated(list_of_pokemons)
     """
-    for i in list_of_pokemons:
-      if i.health_points > 0:
-        return True
-      else:
-        return False
+    if list_of_pokemons[0].health_points <= 0 and list_of_pokemons[1].health_points <= 0 and list_of_pokemons[2].health_points <= 0:
+      return False
+    else:
+      return True
 
 
 def main():
@@ -196,29 +195,45 @@ def main():
     # Main loop.
     while coach_is_undefeated(coach1) and coach_is_undefeated(coach2):
       numeroAleatorio = random.randint(1, 2)
+      print(numeroAleatorio)
       if numeroAleatorio == 1:
         print("Empieza el jugador uno")
         print("El jugador uno selecciona {}".format(pokemons1.pokemon_name))
         print("El jugador dos selecciona {}".format(pokemons2.pokemon_name))
-        while not coach_is_undefeated(coach1) or not coach_is_undefeated(coach2):
+        while True:
           print("El jugador uno ataca")
           pokemons1.fight_attack(pokemons2)
           print("El jugador dos ataca")
           pokemons2.fight_attack(pokemons1)
-          continue
-        break
+          if pokemons1.health_points <= 0:
+            coach1.remove(pokemons1)
+            pokemons1 = get_pokemon_in_a_list_of_pokemons("coach1", coach1)
+          elif pokemons2.health_points <= 0:
+            coach2.remove(pokemons2)
+            pokemons2 = get_pokemon_in_a_list_of_pokemons("coach2", coach2)
+          else:
+            continue
+
+          if coach_is_undefeated(coach1) == False or coach_is_undefeated(coach2) == False:
+            break
+          else:
+            continue
+        
 
       else:
         print("Empieza el jugador dos")
         print("El jugador dos selecciona {}".format(pokemons2.pokemon_name))
         print("El jugador uno selecciona {}".format(pokemons1.pokemon_name))
-        while not coach_is_undefeated(coach1) or not coach_is_undefeated(coach2):
+        while True:
           print("El jugador dos ataca")
           pokemons2.fight_attack(pokemons1)
           print("El jugador uno ataca")
           pokemons1.fight_attack(pokemons2)
-          continue
-        break
+          if coach_is_undefeated(coach1) == False or coach_is_undefeated(coach2) == False:
+            break
+          else:
+            continue
+        
         # Turno del usuario del Juego 2.
       
         # Turno del usuario del Juego 1.
