@@ -94,23 +94,35 @@ def get_pokemon_in_a_list_of_pokemons(coach_to_ask, list_of_pokemons):
     -------
        >>> get_pokemon_in_a_list_of_pokemons(1, list_of_pokemons)
     """
-    for i in list_of_pokemons:
-      print(i.pokemon_name)
+    print(list_of_pokemons[0].pokemon_name, list_of_pokemons[1].pokemon_name, list_of_pokemons[2].pokemon_name)
+  
     pokemon_a_eleir = input("Coach " + str(coach_to_ask) + " select a Pokemon: ")
-    for i in list_of_pokemons:
-      if str(pokemon_a_eleir) == str(list_of_pokemons[0].pokemon_name):
+    for contador, i in enumerate(list_of_pokemons):
+      
+
+      if str(pokemon_a_eleir) == str(i.pokemon_name):
         print("Ha seleccionado {}".format(list_of_pokemons[0].pokemon_name))
-        return list_of_pokemons[0]
-      elif str(pokemon_a_eleir) == str(list_of_pokemons[1].pokemon_name):
+        return list_of_pokemons[contador]
+      else:
+        contador = contador + 1
+        if contador > len(list_of_pokemons):
+          print("No ha seleccionado ningun Pokemon")
+          print(get_pokemon_in_a_list_of_pokemons(coach_to_ask, list_of_pokemons))
+        else:
+          continue
+        
+
+        continue
+      """elif str(pokemon_a_eleir) == str(list_of_pokemons[1].pokemon_name):
         print("Ha seleccionado {}".format(list_of_pokemons[1].pokemon_name))
         return list_of_pokemons[1]
       elif str(pokemon_a_eleir) == str(list_of_pokemons[2].pokemon_name):
         print("Ha seleccionado {}".format(list_of_pokemons[2].pokemon_name))
-        return list_of_pokemons[2]
+        return list_of_pokemons.pokemon_name
       else:
         print("No ha seleccionado ningun Pokemon")
         print(get_pokemon_in_a_list_of_pokemons(coach_to_ask, list_of_pokemons))
-        
+        """
 
 
 def coach_is_undefeated(list_of_pokemons):
@@ -186,7 +198,18 @@ def main():
 
     # Get a copy of the list of pokemons:
     pokemons= [coach1, coach2]
-    
+    def cambiar_pokemon(jugador, pokemon_a_cambiar):
+      while True:
+              cambiar = input("{}, Quieres cambiar de pokemon? (si/no):".format(jugador))
+              if cambiar == "si":
+                get_pokemon_in_a_list_of_pokemons(jugador, pokemon_a_cambiar)
+                return "cambiado"
+                
+              elif cambiar == "no":
+                break
+              else:
+                print("No has introducido una opcion valida")
+                continue
     
 
     # Choose first pokemons
@@ -207,39 +230,55 @@ def main():
           pokemons2.fight_attack(pokemons1)
           if pokemons1.health_points <= 0:
             coach1.remove(pokemons1)
-            pokemons1 = get_pokemon_in_a_list_of_pokemons("coach1", coach1)
+            if coach_is_undefeated(coach1) == False or coach_is_undefeated(coach2) == False:
+              break
+            else:
+              pokemons1 = get_pokemon_in_a_list_of_pokemons("coach1", coach1)
           elif pokemons2.health_points <= 0:
             coach2.remove(pokemons2)
-            pokemons2 = get_pokemon_in_a_list_of_pokemons("coach2", coach2)
+            if coach_is_undefeated(coach1) == False or coach_is_undefeated(coach2) == False:
+             break
+            else:
+              pokemons2 = get_pokemon_in_a_list_of_pokemons("coach2", coach2)
           else:
+            print(cambiar_pokemon("coach1", coach1))
+            print(cambiar_pokemon("coach2", coach2))
             continue
+          
 
-          if coach_is_undefeated(coach1) == False or coach_is_undefeated(coach2) == False:
-            break
-          else:
-            continue
         
 
       else:
         print("Empieza el jugador dos")
-        print("El jugador dos selecciona {}".format(pokemons2.pokemon_name))
+        print("El jugador dos selecciona {}".format(pokemons2.pokemon_name))  
         print("El jugador uno selecciona {}".format(pokemons1.pokemon_name))
         while True:
           print("El jugador dos ataca")
           pokemons2.fight_attack(pokemons1)
           print("El jugador uno ataca")
           pokemons1.fight_attack(pokemons2)
-          print("Los pokemon del jugador 1 son:")
-          for i in coach1:
-            print(i.pokemon_name)
-          print("Los pokemon del jugador 2 son:")
-          for i in coach2:
-            print(i.pokemon_name)
-          if coach_is_undefeated(coach1) == False or coach_is_undefeated(coach2) == False:
-            break
+          if pokemons1.health_points <= 0:
+            coach1.remove(pokemons1)
+            if coach_is_undefeated(coach1) == False or coach_is_undefeated(coach2) == False:
+              break
+            else:
+              pokemons1 = get_pokemon_in_a_list_of_pokemons("coach1", coach1)
+          elif pokemons2.health_points <= 0:
+            coach2.remove(pokemons2)
+            if coach_is_undefeated(coach1) == False or coach_is_undefeated(coach2) == False:
+             break
+            else:
+              pokemons2 = get_pokemon_in_a_list_of_pokemons("coach2", coach2)
           else:
+            print(cambiar_pokemon("Jugador 1", coach1))
+            print(cambiar_pokemon("Jugador 2", coach2))
             continue
-        
+            
+          
+
+
+
+
         # Turno del usuario del Juego 2.
       
         # Turno del usuario del Juego 1.
