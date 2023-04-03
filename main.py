@@ -34,6 +34,7 @@ This Python method contains the application of the Game.
 import random
 import csv
 from pokemon import Pokemon
+from weapon_type import WeaponType
 def get_data_from_user(name_file):
     """Function to obtain data from each user.
 
@@ -60,7 +61,15 @@ def get_data_from_user(name_file):
     with open(name_file, "r") as file:
       reader = csv.reader(file)
       for line in reader:
-        list = Pokemon(int(line[0]), str(line[1]), str(line[2]), int(line[3]), int(line[4]), int(line[5]))
+        if line[2]=="headbutt":
+          list = Pokemon(int(line[0]), str(line[1]), WeaponType.HEADBUTT, int(line[3]), int(line[4]), int(line[5]))
+        elif line[2]=="punch":
+          list = Pokemon(int(line[0]), str(line[1]), WeaponType.PUNCH, int(line[3]), int(line[4]), int(line[5]))
+        elif line[2]=="kick":
+          list = Pokemon(int(line[0]), str(line[1]), WeaponType.KICK, int(line[3]), int(line[4]), int(line[5]))
+        elif line[2]=="elbow":
+          list = Pokemon(int(line[0]), str(line[1]), WeaponType.ELBOW, int(line[3]), int(line[4]), int(line[5]))
+        
         list_pokemons.append(list)
     return list_pokemons
             
@@ -173,7 +182,7 @@ def main():
     # Get configuration for Game User 1.
     coach1 = get_data_from_user("coach_1_pokemons.csv")
     for i in coach1:
-      print("Nombre:", i.pokemon_name,"Puntos de salud: ", i.health_points,"Puntos de ataque: ", i.attack_rating,"Puntos de defensa: ", i.defense_rating)
+      print(i)
     
     
     
@@ -182,7 +191,7 @@ def main():
     # Get configuration for Game User 2.
     coach2 = get_data_from_user("coach_2_pokemons.csv")
     for i in coach2:
-      print("Nombre:", i.pokemon_name,"Puntos de salud: ", i.health_points,"Puntos de ataque: ", i.attack_rating,"Puntos de defensa: ", i.defense_rating)
+      print(i)
     dañoRecibido1 = 0
     dañoRecibido2 = 0
     dañoRealizado1 = 0
