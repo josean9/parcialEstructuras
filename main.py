@@ -224,12 +224,12 @@ def main():
           dañoRealizado2 += pokemons2.attack_rating - pokemons1.defense_rating
           dañoRecibido1 += pokemons2.attack_rating - pokemons1.defense_rating
 
-          if pokemons1.health_points <= 0:
+          if pokemons1.health_points <= 0: #si el pokemon 1 no le queda vida, se elimina y se escoge otro
             coach1.remove(pokemons1)
-            if coach_is_undefeated(coach1) == False or coach_is_undefeated(coach2) == False:
+            if coach_is_undefeated(coach1) == False or coach_is_undefeated(coach2) == False:#en caso de no queda pookemons, se acaba el juego
               break
             else:
-              pokemons1 = get_pokemon_in_a_list_of_pokemons("coach1", coach1)
+              pokemons1 = get_pokemon_in_a_list_of_pokemons("coach1", coach1)# en caso de si quedar pokemons vivos, se escoge otro
           elif pokemons2.health_points <= 0:
             coach2.remove(pokemons2)
             if coach_is_undefeated(coach1) == False or coach_is_undefeated(coach2) == False:
@@ -258,12 +258,12 @@ def main():
           dañoRealizado1 += pokemons1.attack_rating - pokemons2.defense_rating
           dañoRecibido2 += pokemons1.attack_rating - pokemons2.defense_rating
 
-          if pokemons1.health_points <= 0:
+          if pokemons1.health_points <= 0:#si el pokemon 1 no le queda vida, se elimina y se escoge otro
             coach1.remove(pokemons1)
-            if coach_is_undefeated(coach1) == False or coach_is_undefeated(coach2) == False:
+            if coach_is_undefeated(coach1) == False or coach_is_undefeated(coach2) == False:#en caso de no queda pokemons, se acaba el juego
               break
             else:
-              pokemons1 = get_pokemon_in_a_list_of_pokemons("coach1", coach1)
+              pokemons1 = get_pokemon_in_a_list_of_pokemons("coach1", coach1)# en caso de si quedar pokemones vivos, se escoge otro
           elif pokemons2.health_points <= 0:
             coach2.remove(pokemons2)
             if coach_is_undefeated(coach1) == False or coach_is_undefeated(coach2) == False:
@@ -279,12 +279,12 @@ def main():
 
 
         # Turno del usuario del Juego 2.
-      if len(coach1)==0:
+      if len(coach1)==0:#si el jugador 1 no le queda pokemons, se acaba el juego
         print("------------------------------------------------------------------")
         print("Ha ganado el jugador dos")
         print("------------------------------------------------------------------")
         # Turno del usuario del Juego 1.
-      elif len(coach2)==0:
+      elif len(coach2)==0:#si el jugador 2 no le queda pokemons se acaba el juego
         print("------------------------------------------------------------------")
         print("Ha ganado el jugador uno")
         print("------------------------------------------------------------------")
