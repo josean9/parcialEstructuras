@@ -94,35 +94,24 @@ def get_pokemon_in_a_list_of_pokemons(coach_to_ask, list_of_pokemons):
     -------
        >>> get_pokemon_in_a_list_of_pokemons(1, list_of_pokemons)
     """
-    print(list_of_pokemons[0].pokemon_name, list_of_pokemons[1].pokemon_name, list_of_pokemons[2].pokemon_name)
-  
+    if len(list_of_pokemons) == 3:
+      print("1:", list_of_pokemons[0].pokemon_name,"2:", list_of_pokemons[1].pokemon_name,"3:", list_of_pokemons[2].pokemon_name)
+    elif len(list_of_pokemons) == 2:
+      print("1:", list_of_pokemons[0].pokemon_name,"2:", list_of_pokemons[1].pokemon_name)
+    else:
+      print("Solo le queda, 1:", list_of_pokemons[0].pokemon_name)
     pokemon_a_eleir = input("Coach " + str(coach_to_ask) + " select a Pokemon: ")
-    for contador, i in enumerate(list_of_pokemons):
-      
+    pokemon_a_eleir = int(pokemon_a_eleir)
+    if pokemon_a_eleir == 1:
+      pokemon_a_eleir = list_of_pokemons[0]
+    elif pokemon_a_eleir == 2:  
+      pokemon_a_eleir = list_of_pokemons[1]
+    elif pokemon_a_eleir == 3:
+      pokemon_a_eleir = list_of_pokemons[2]
+    return pokemon_a_eleir
+    
 
-      if str(pokemon_a_eleir) == str(i.pokemon_name):
-        print("Ha seleccionado {}".format(list_of_pokemons[0].pokemon_name))
-        return list_of_pokemons[contador]
-      else:
-        contador = contador + 1
-        if contador > len(list_of_pokemons):
-          print("No ha seleccionado ningun Pokemon")
-          print(get_pokemon_in_a_list_of_pokemons(coach_to_ask, list_of_pokemons))
-        else:
-          continue
-        
-
-        continue
-      """elif str(pokemon_a_eleir) == str(list_of_pokemons[1].pokemon_name):
-        print("Ha seleccionado {}".format(list_of_pokemons[1].pokemon_name))
-        return list_of_pokemons[1]
-      elif str(pokemon_a_eleir) == str(list_of_pokemons[2].pokemon_name):
-        print("Ha seleccionado {}".format(list_of_pokemons[2].pokemon_name))
-        return list_of_pokemons.pokemon_name
-      else:
-        print("No ha seleccionado ningun Pokemon")
-        print(get_pokemon_in_a_list_of_pokemons(coach_to_ask, list_of_pokemons))
-        """
+    
 
 
 def coach_is_undefeated(list_of_pokemons):
@@ -148,7 +137,7 @@ def coach_is_undefeated(list_of_pokemons):
     -------
        >>> coach_is_undefeated(list_of_pokemons)
     """
-    if list_of_pokemons[0].health_points <= 0 and list_of_pokemons[1].health_points <= 0 and list_of_pokemons[2].health_points <= 0:
+    if len(list_of_pokemons)==0:
       return False
     else:
       return True
@@ -198,24 +187,17 @@ def main():
 
     # Get a copy of the list of pokemons:
     pokemons= [coach1, coach2]
-    def cambiar_pokemon(jugador, pokemon_a_cambiar):
-      while True:
-              cambiar = input("{}, Quieres cambiar de pokemon? (si/no):".format(jugador))
-              if cambiar == "si":
-                get_pokemon_in_a_list_of_pokemons(jugador, pokemon_a_cambiar)
-                return "cambiado"
-                
-              elif cambiar == "no":
-                break
-              else:
-                print("No has introducido una opcion valida")
-                continue
+    
     
 
     # Choose first pokemons
     pokemons1 = get_pokemon_in_a_list_of_pokemons("coach1", coach1)
     pokemons2 = get_pokemon_in_a_list_of_pokemons("coach2", coach2)
     # Main loop.
+    
+      
+      
+
     while coach_is_undefeated(coach1) and coach_is_undefeated(coach2):
       numeroAleatorio = random.randint(1, 2)
       print(numeroAleatorio)
@@ -241,9 +223,7 @@ def main():
             else:
               pokemons2 = get_pokemon_in_a_list_of_pokemons("coach2", coach2)
           else:
-            print(cambiar_pokemon("coach1", coach1))
-            print(cambiar_pokemon("coach2", coach2))
-            continue
+           continue
           
 
         
@@ -269,9 +249,7 @@ def main():
              break
             else:
               pokemons2 = get_pokemon_in_a_list_of_pokemons("coach2", coach2)
-          else:
-            print(cambiar_pokemon("Jugador 1", coach1))
-            print(cambiar_pokemon("Jugador 2", coach2))
+          else: 
             continue
             
           
@@ -280,8 +258,12 @@ def main():
 
 
         # Turno del usuario del Juego 2.
-      
+      if len(coach1)==0:
+        print("Ha ganado el jugador dos")
+
         # Turno del usuario del Juego 1.
+      else:
+        print("Ha ganado el jugador uno")
         
 
 
