@@ -76,12 +76,7 @@ class Pokemon():
         self.health_points = health_points
         self.attack_rating = attack_rating
         self.defense_rating = defense_rating
-        while True:
-            try:
-                self.id = int(self.id)
-                break
-            except ValueError:
-                self.id = int(input("El ID debe ser un número, por favor, introduzca un número: "))
+        
         while True:
             try:
                 self.health_points = int(self.health_points)
