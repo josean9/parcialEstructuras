@@ -179,7 +179,7 @@ def main():
 
     # Get configuration for Game User 2.
     coach2 = get_data_from_user("coach_2_pokemons.csv")
-    
+    dañoRecibido1 
     
     print("------------------------------------------------------------------")
     print("The Game starts...")
@@ -259,12 +259,14 @@ def main():
 
         # Turno del usuario del Juego 2.
       if len(coach1)==0:
+        print("------------------------------------------------------------------")
         print("Ha ganado el jugador dos")
-
+        print("------------------------------------------------------------------")
         # Turno del usuario del Juego 1.
-      else:
+      elif len(coach2)==0:
+        print("------------------------------------------------------------------")
         print("Ha ganado el jugador uno")
-        
+        print("------------------------------------------------------------------")
 
 
 
