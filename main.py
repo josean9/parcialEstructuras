@@ -172,6 +172,8 @@ def main():
 
     # Get configuration for Game User 1.
     coach1 = get_data_from_user("coach_1_pokemons.csv")
+    for i in coach1:
+      print("Nombre:", i.pokemon_name,"Puntos de salud: ", i.health_points,"Puntos de ataque: ", i.attack_rating,"Puntos de defensa: ", i.defense_rating)
     
     
     
@@ -179,7 +181,12 @@ def main():
 
     # Get configuration for Game User 2.
     coach2 = get_data_from_user("coach_2_pokemons.csv")
-    dañoRecibido1 
+    for i in coach2:
+      print("Nombre:", i.pokemon_name,"Puntos de salud: ", i.health_points,"Puntos de ataque: ", i.attack_rating,"Puntos de defensa: ", i.defense_rating)
+    dañoRecibido1 = 0
+    dañoRecibido2 = 0
+    dañoRealizado1 = 0
+    dañoRealizado2 = 0
     
     print("------------------------------------------------------------------")
     print("The Game starts...")
@@ -206,10 +213,17 @@ def main():
         print("El jugador uno selecciona {}".format(pokemons1.pokemon_name))
         print("El jugador dos selecciona {}".format(pokemons2.pokemon_name))
         while True:
+
           print("El jugador uno ataca")
           pokemons1.fight_attack(pokemons2)
+          dañoRealizado1 += pokemons1.attack_rating - pokemons2.defense_rating
+          dañoRecibido2 += pokemons1.attack_rating - pokemons2.defense_rating
+
           print("El jugador dos ataca")
           pokemons2.fight_attack(pokemons1)
+          dañoRealizado2 += pokemons2.attack_rating - pokemons1.defense_rating
+          dañoRecibido1 += pokemons2.attack_rating - pokemons1.defense_rating
+
           if pokemons1.health_points <= 0:
             coach1.remove(pokemons1)
             if coach_is_undefeated(coach1) == False or coach_is_undefeated(coach2) == False:
@@ -233,10 +247,17 @@ def main():
         print("El jugador dos selecciona {}".format(pokemons2.pokemon_name))  
         print("El jugador uno selecciona {}".format(pokemons1.pokemon_name))
         while True:
+
           print("El jugador dos ataca")
           pokemons2.fight_attack(pokemons1)
+          dañoRealizado2 += pokemons2.attack_rating - pokemons1.defense_rating
+          dañoRecibido1 += pokemons2.attack_rating - pokemons1.defense_rating
+
           print("El jugador uno ataca")
           pokemons1.fight_attack(pokemons2)
+          dañoRealizado1 += pokemons1.attack_rating - pokemons2.defense_rating
+          dañoRecibido2 += pokemons1.attack_rating - pokemons2.defense_rating
+
           if pokemons1.health_points <= 0:
             coach1.remove(pokemons1)
             if coach_is_undefeated(coach1) == False or coach_is_undefeated(coach2) == False:
@@ -280,9 +301,12 @@ def main():
     print("Statistics")
     print("------------------------------------------------------------------")
     print("Game User 1:")
-
-
+    print("El jugador uno ha realizado", dañoRealizado1, "de daño")
+    print("El jugador uno ha recibido", dañoRecibido1, "de daño")
+    print("------------------------------------------------------------------")
     print("Game User 2:")
+    print("El jugador dos ha realizado", dañoRealizado2, "de daño")
+    print("El jugador dos ha recibido", dañoRecibido2, "de daño")
 
 
 
