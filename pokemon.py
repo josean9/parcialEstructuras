@@ -128,7 +128,7 @@ class Pokemon():
         return self.defense_rating
     
     def __str__(self):
-        return "Pokemon ID " + str(self.id) + " with name " + str(self.pokemon_name) + " has as weapon " + self.weapon_type.name + " and health " + str(self.health_points)
+        return "Pokemon ID " + str(self.id) + " with name " + str(self.pokemon_name) + " has as weapon " + str(self.weapon_type.name) + " and health " + str(self.health_points)
     def is_alive(self):
         if self.health_points > 0:
             return True
